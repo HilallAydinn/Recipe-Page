@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: rgb(206, 238, 206);
+}
+
 .navbar {
   position: absolute;
   width: 100%;
@@ -33,7 +37,6 @@
 .home {
   display: flex;
   height: 100vh;
-  background-color: rgb(206, 238, 206);
   justify-content: space-between;
 }
 
@@ -61,4 +64,52 @@
   height: 100vh;
   border-top-left-radius: 30%;
   border-bottom-left-radius: 30%;
+}
+
+.recipes {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.recipes > h2 {
+  font-size: 30px;
+  color: rgb(60, 99, 60);
+  margin-left: 50px;
+}
+
+.recipe {
+  display: flex;
+  gap: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+  overflow-x: scroll;
+}
+
+.recipe::-webkit-scrollbar-track {
+  background: #3c633c;
+}
+
+.recipe::-webkit-scrollbar-thumb {
+  background: #ceeece;
+}
+
+.card {
+  width: 190px;
+  background-color: rgb(60, 99, 60);
+  color: rgb(206, 238, 206);
+  text-align: center;
+  padding-bottom: 16px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.card > img {
+  width: 190px;
+  height: 200px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  margin-bottom:16px;
 }
