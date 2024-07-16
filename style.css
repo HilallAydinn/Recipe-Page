@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +9,7 @@
 
 body {
   background-color: rgb(214, 237, 214);
+  font-family: 'Open Sans', sans-serif;
 }
 
 .navbar {
@@ -54,6 +58,8 @@ body {
 
 .text > h1 {
   font-size: 40px;
+  font-family: 'Lobster', cursive;
+  font-weight: normal;
   color: rgb(60, 99, 60);
 }
 
@@ -70,33 +76,30 @@ body {
   z-index: 10;
 }
 
-.recipes {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-  padding-top: 50px;
-  margin-top: 100px;
-  margin-bottom: 100px;
-}
-
-.recipes > h2 {
-  font-size: 30px;
-  color: rgb(60, 99, 60);
-  margin-left: 50px;
-}
-
-.recipe {
-  display: flex;
-  gap: 50px;
-  margin-left: 50px;
-  margin-right: 50px;
+.category {
+  margin: 30px 50px;
   overflow-x: scroll;
   scrollbar-color:rgb(60, 99, 60) rgb(157, 193, 157);
   scrollbar-width: thin;
 }
 
-.card {
-  width: 190px;
+.category > h2 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: rgb(60, 99, 60);
+}
+
+#breakfast {
+  margin-top: 50px;
+}
+
+.recipes {
+  display: flex;
+  gap: 40px;
+}
+
+.recipe-card {
+  width: 200px;
   background-color: rgb(60, 99, 60);
   color: rgb(206, 238, 206);
   text-align: center;
@@ -105,17 +108,22 @@ body {
   margin-bottom: 20px;
 }
 
-.card > a > img {
-  width: 190px;
+.recipe-card img {
+  width: 200px;
   height: 200px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   margin-bottom:16px;
 }
 
+.recipe-card > h3 {
+  font-weight: normal;
+}
+
 .about {
   display: flex;
   width: 100%;
+  margin-top: 50px;
   margin-bottom: 50px;
   padding-bottom: 20px;
   gap: 50px;
@@ -191,6 +199,9 @@ footer ul {
   .navbar > ul li a {
     padding: 10px 20px;
   }
+  .recipe-card img {
+    height: 220px;
+  }
   .features {
     flex-direction: column;
     align-items: center;
@@ -212,10 +223,10 @@ footer ul {
   .text {
     width: auto;
   }
-  .card {
+  .recipe-card {
     width: 300px;
   }
-  .card > a > img {
+  .recipe-card img {
     width: 300px;
   }
   .about-us {
@@ -243,10 +254,10 @@ footer ul {
   .text > p {
     font-size: 24px;
   }
-  .card {
+  .recipe-card {
     width: 320px;
   }
-  .card > a > img {
+  .recipe-card img {
     width: 320px;
     height: 330px;
   }
