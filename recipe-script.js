@@ -1,53 +1,40 @@
-async function fetchMealDetails(mealId) {
-    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`);
+async function fetchMealDetails(id) {
+    const response = await fetch(`http://localhost:4000/recipes/${id}`);
     const data = await response.json();
-    return data.meals[0];
-}
-
-async function fetchDrinkDetails(drinkId) {
-    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`);
-    const data = await response.json();
-    return data.drinks[0];
+    return data;
 }
 
 async function displayRecipes(category) {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
-    const type = urlParams.get('type');
 
-    let recipe;
-    if (type === 'drink') {
-        recipe = await fetchDrinkDetails(id);
-    } else {
-        recipe = await fetchMealDetails(id);
-    }
+    recipe = await fetchMealDetails(id);
 
     if (recipe) {
-        document.getElementById('recipe-image').src = type === 'drink' ? recipe.strDrinkThumb : recipe.strMealThumb;
-        document.getElementById('recipe-title').textContent = type === 'drink' ? recipe.strDrink : recipe.strMeal;
+        document.getElementById('recipe-image').src = recipe.img;
+        document.getElementById('recipe-title').textContent = recipe.title;
 
         const ingredientsList = document.getElementById('recipe-ingredients');
         ingredientsList.innerHTML = '';
 
-        if (type === 'drink') {
-            for (let i = 1; i <= 15; i++) {
-                if (recipe[`strIngredient${i}`]) {
-                    const li = document.createElement('li');
-                    li.textContent = `${recipe[`strMeasure${i}`] || ''} ${recipe[`strIngredient${i}`]}`;
-                    ingredientsList.appendChild(li);
-                }
-            }
-        } else {
-            for (let i = 1; i <= 20; i++) {
-                if (recipe[`strIngredient${i}`]) {
-                    const li = document.createElement('li');
-                    li.textContent = `${recipe[`strMeasure${i}`]} ${recipe[`strIngredient${i}`]}`;
-                    ingredientsList.appendChild(li);
-                }
+        for (let i = 1; i <= 20; i++) {
+            if (recipe[`ingredient${i}`]) {
+                const li = document.createElement('li');
+                li.textContent = `${recipe[`ingredient${i}`]}`;
+                ingredientsList.appendChild(li);
             }
         }
 
-        document.getElementById('recipe-instructions').textContent = type === 'drink' ? recipe.strInstructions : recipe.strInstructions;
+        const instructionsList = document.getElementById('recipe-instructions');
+        instructionsList.innerHTML = '';
+
+        for (let i = 1; i <= 20; i++) {
+            if (recipe[`instruction${i}`]) {
+                const li = document.createElement('li');
+                li.textContent = `${recipe[`instruction${i}`]}`;
+                instructionsList.appendChild(li);
+            }
+        }
     }
 }
 

@@ -1,32 +1,26 @@
 const recipeIds = {
-    breakfast: [53076, 52962, 52967, 52964, 52965, 52895],
-    lunch: [52841, 52914, 53014, 52845, 52969, 52779],
-    dinner: [52873, 52770, 52941, 52830, 52851, 53041],
-    desserts: [52893, 52892, 52855, 52860, 52900, 52833],
-    drinks: [12716, 13036, 12784, 11012, 17834, 12562]
+    breakfast: [1, 2, 3, 4, 5, 6],
+    lunch: [7, 8, 9, 10, 11, 12],
+    dinner: [13, 14, 15, 16, 17, 18],
+    desserts: [19, 20, 21, 22, 23, 24],
+    drinks: [25, 26, 27, 28, 29, 30]
 };
 
-async function fetchMealDetails(mealId) {
-    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${mealId}`);
+async function fetchMealDetails(id) {
+    const response = await fetch(`http://localhost:4000/recipes/${id}`);
     const data = await response.json();
-    return data.meals[0];
+    return data;
 }
 
-async function fetchDrinkDetails(drinkId) {
-    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`);
-    const data = await response.json();
-    return data.drinks[0];
-}
-
-function createRecipeCard(recipe, isDrink = false) {
+function createRecipeCard(recipe) {
     const card = document.createElement('div');
     card.className = 'recipe-card';
     card.innerHTML = `
-        <img src="${isDrink ? recipe.strDrinkThumb : recipe.strMealThumb}" alt="${isDrink ? recipe.strDrink : recipe.strMeal}">
-        <h3>${isDrink ? recipe.strDrink : recipe.strMeal}</h3>
+        <img src="${recipe.img}" alt="${recipe.title}">
+        <h3>${recipe.title}</h3>
     `;
     card.addEventListener('click', () => {
-        window.location.href = `recipe.html?id=${isDrink ? recipe.idDrink : recipe.idMeal}&type=${isDrink ? 'drink' : 'meal'}`;
+        window.location.href = `recipe.html?id=${recipe.id}&type=${'meal'}`;
     });
     return card;
 }
@@ -34,13 +28,8 @@ function createRecipeCard(recipe, isDrink = false) {
 async function displayRecipes(category) {
     const categoryDiv = document.getElementById(`${category}`).querySelector('.recipes');
     for (const id of recipeIds[category]) {
-        let recipe;
-        if (category === 'drinks') {
-            recipe = await fetchDrinkDetails(id);
-        } else {
-            recipe = await fetchMealDetails(id);
-        }
-        const card = createRecipeCard(recipe, category === 'drinks');
+        const recipe = await fetchMealDetails(id);
+        const card = createRecipeCard(recipe);
         categoryDiv.appendChild(card);
     }
 }
@@ -52,3 +41,10 @@ document.addEventListener('DOMContentLoaded', () => {
     displayRecipes('desserts');
     displayRecipes('drinks');
 });
+
+
+document.getElementById('admin-btn').addEventListener('click', function() {
+window.location.href = 'login.html';
+});
+
+
