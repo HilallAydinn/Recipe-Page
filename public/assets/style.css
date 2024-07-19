@@ -33,7 +33,7 @@ body {
   margin-top: 7px;
 }
 
-.navbar ul li#admin-btn > button {
+.navbar ul li#admin-btn > a {
   background-color: rgb(214, 237, 214);
   color: rgb(60, 99, 60);
   padding: 8px;
