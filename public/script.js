@@ -1,14 +1,15 @@
 const recipeIds = {
-    breakfast: [1, 2, 3, 4, 5, 6],
+    breakfast: [1, 2, 3, 4, 5, 6, 12],
     lunch: [7, 8, 9, 10, 11, 12],
     dinner: [13, 14, 15, 16, 17, 18],
-    desserts: [19, 20, 21, 22, 23, 24],
+    desserts: [19, 20, 21, 22, 23, 24, 31],
     drinks: [25, 26, 27, 28, 29, 30]
 };
 
 async function fetchMealDetails(id) {
-    const response = await fetch(`http://localhost:4000/recipes/${id}`);
+    const response = await fetch(`http://localhost:3000/recipes/${id}`);
     const data = await response.json();
+    console.log(data);
     return data;
 }
 
@@ -46,5 +47,3 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('admin-btn').addEventListener('click', function() {
 window.location.href = 'login.html';
 });
-
-

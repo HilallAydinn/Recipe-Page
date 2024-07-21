@@ -1,5 +1,5 @@
 async function fetchMealDetails(id) {
-    const response = await fetch(`http://localhost:4000/recipes/${id}`);
+    const response = await fetch(`http://localhost:3000/recipes/${id}`);
     const data = await response.json();
     return data;
 }
@@ -8,7 +8,7 @@ async function displayRecipes(category) {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
 
-    recipe = await fetchMealDetails(id);
+    const recipe = await fetchMealDetails(id);
 
     if (recipe) {
         document.getElementById('recipe-image').src = recipe.img;
@@ -17,23 +17,25 @@ async function displayRecipes(category) {
         const ingredientsList = document.getElementById('recipe-ingredients');
         ingredientsList.innerHTML = '';
 
-        for (let i = 1; i <= 20; i++) {
-            if (recipe[`ingredient${i}`]) {
+        if (typeof recipe.ingredients === 'string') {
+            const ingredientsArray = recipe.ingredients.split(';');
+            ingredientsArray.forEach(ingredient => {
                 const li = document.createElement('li');
-                li.textContent = `${recipe[`ingredient${i}`]}`;
+                li.textContent = ingredient.trim();
                 ingredientsList.appendChild(li);
-            }
+            });
         }
 
         const instructionsList = document.getElementById('recipe-instructions');
         instructionsList.innerHTML = '';
 
-        for (let i = 1; i <= 20; i++) {
-            if (recipe[`instruction${i}`]) {
+        if (typeof recipe.instructions === 'string') {
+            const instructionsArray = recipe.instructions.split(';');
+            instructionsArray.forEach(instruction => {
                 const li = document.createElement('li');
-                li.textContent = `${recipe[`instruction${i}`]}`;
+                li.textContent = instruction.trim();
                 instructionsList.appendChild(li);
-            }
+            });
         }
     }
 }

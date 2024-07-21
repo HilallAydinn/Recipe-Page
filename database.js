@@ -19,7 +19,7 @@ const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '001234',
-    database: 'admin_db'
+    database: 'recipes_db'
 });
 
 connection.connect(function(error){
@@ -48,15 +48,15 @@ app.post("/login", encoder, function(req, res){
             return;
         }
         if(results.length > 0){
-            res.redirect("/welcome.html");
+            res.redirect("/admin.html");
         } else {
             res.sendFile(path.join(__dirname, 'public', 'login.html'));
         }
     });
 });
 
-app.get("/welcome.html", function(req, res){
-    res.sendFile(path.join(__dirname, 'public', 'welcome.html'));
+app.get("/admin.html", function(req, res){
+    res.sendFile(path.join(__dirname, 'public', 'admin.html'));
 });
 
 const PORT = process.env.PORT || 5501;
