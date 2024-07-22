@@ -25,8 +25,10 @@ body {
 }
 
 .recipe-detail > img {
-  max-width: 100%;
-  height: auto;
+  width: 600px;
+  height: 400px;
+  object-fit: cover; /* Resmi, kutuyu tamamen kaplayacak şekilde keser */
+  object-position: center; /* Resmi ortalar */
   border-radius: 15px;
   margin-bottom: 20px;
 }
@@ -60,6 +62,9 @@ body {
     margin: 0;
     border-radius: 0;
     max-width: 1024px;
+  }
+  .recipe-detail > img {
+    width: 100%;
   }
 }
 @media (max-width: 1024px) {

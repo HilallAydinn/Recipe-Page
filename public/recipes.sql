@@ -2,7 +2,7 @@ CREATE DATABASE recipes_db
 
 CREATE TABLE recipes (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
+    title VARCHAR(255) NOT NULL UNIQUE,
     img TEXT NOT NULL,
     ingredients TEXT NOT NULL,
     instructions TEXT NOT NULL,
@@ -14,6 +14,7 @@ CREATE TABLE users (
     username VARCHAR(255) NOT NULL,
     password VARCHAR(50) NOT NULL
 );
+
 
 INSERT INTO recipes (title, img, ingredients, instructions, category)
 VALUES

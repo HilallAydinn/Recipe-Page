@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+  
+body {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(60, 99, 60);
+}
+
+.container {
+  background-color: rgb(214, 237, 214);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.container > a {
+  color: rgb(60, 99, 60);
+  text-decoration: none;
+  font-size: 24px;
+}

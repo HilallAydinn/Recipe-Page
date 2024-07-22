@@ -1,5 +1,7 @@
+import URL from '../config/config.js';
+
 async function fetchMealDetails(id) {
-    const response = await fetch(`http://localhost:3000/recipes/${id}`);
+    const response = await fetch(`${URL}recipes/id/${id}`);
     const data = await response.json();
     return data;
 }

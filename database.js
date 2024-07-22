@@ -31,11 +31,11 @@ connection.connect(function(error){
 });
 
 app.get("/", function(req, res){
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public/html', 'index.html'));
 });
 
 app.get("/login", function(req, res){
-    res.sendFile(path.join(__dirname, 'public', 'login.html'));
+    res.sendFile(path.join(__dirname, 'public/html', 'login.html'));
 });
 
 app.post("/login", encoder, function(req, res){
@@ -50,13 +50,13 @@ app.post("/login", encoder, function(req, res){
         if(results.length > 0){
             res.redirect("/admin.html");
         } else {
-            res.sendFile(path.join(__dirname, 'public', 'login.html'));
+            res.sendFile(path.join(__dirname, 'public/html', 'login.html'));
         }
     });
 });
 
 app.get("/admin.html", function(req, res){
-    res.sendFile(path.join(__dirname, 'public', 'admin.html'));
+    res.sendFile(path.join(__dirname, 'public/html', 'admin.html'));
 });
 
 const PORT = process.env.PORT || 5501;

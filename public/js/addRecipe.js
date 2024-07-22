@@ -1,3 +1,5 @@
+import URL from '../config/config.js';
+
 document.getElementById('recipe-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -16,7 +18,7 @@ document.getElementById('recipe-form').addEventListener('submit', async (e) => {
     };
 
     try {
-        const response = await fetch('http://localhost:3000/recipes', {
+        const response = await fetch(`${URL}recipes`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

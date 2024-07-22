@@ -9,13 +9,13 @@ body {
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background-color: rgb(108, 101, 91);
+  background-color: rgb(60, 99, 60);
 }
 
 #recipe-form {
-  background-color: rgb(201, 189, 171);
+  background-color: rgb(214, 237, 214);
   padding: 20px;
-  color: rgb(108, 101, 91);
+  color: rgb(60, 99, 60);
   border-radius: 10px;
 }
 
@@ -36,10 +36,17 @@ body {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  background-color: rgb(247, 240, 227);
-  color: rgb(108, 101, 91);
+  background-color: rgb(177, 204, 177);
+  color: rgb(60, 99, 60);
 }
 
 #recipe-form > button:hover{
-  background-color: rgb(230, 221, 207);
+  background-color: rgb(157, 182, 157);
+}
+
+.recipe-details {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  max-height: 150px;
+  overflow-y: auto;
 }
