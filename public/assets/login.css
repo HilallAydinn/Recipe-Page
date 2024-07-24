@@ -7,17 +7,18 @@
 body {
   display: flex;
   height: 100vh;
-  justify-content: center;
+  justify-content: left;
+  margin-left: 200px;
   align-items: center;
-  background: url("../images/cooking-bg.jpg") no-repeat;
+  background: url("../images/login-background-2.jpg") no-repeat;
   background-size: cover;
   background-position: center;
-  color: rgb(108, 101, 91);
+  color: rgb(84, 79, 71);
   text-align: center;
 }
 
 form {
-  background-color: rgb(201, 189, 171);
+  background-color: rgb(200, 180, 149);
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -35,15 +36,26 @@ form > input {
   outline: none;
 }
 
+form > p {
+  font-size: 14px;
+}
+
+form > p > a {
+  font-weight: bold;
+  color: rgb(84, 79, 71);
+  text-decoration: none;
+  cursor: pointer;
+}
+
 #submit-btn {
   font-weight: bold;
-  color: rgb(108, 101, 91);
-  background-color: rgb(176, 165, 150);
+  color: rgb(246, 239, 229);
+  background-color: rgb(84, 79, 71);
   cursor: pointer;
 }
 
 #submit-btn:hover {
-  background-color: rgb(144, 135, 124);
+  background-color: rgb(59, 56, 51);
 }
 
 ::placeholder {

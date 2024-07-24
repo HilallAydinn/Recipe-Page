@@ -5,29 +5,81 @@
 }
 
 body {
+  background-color: rgb(214, 237, 214);
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 15%;
+  background-color: rgb(60, 99, 60);
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  text-align: center;
+}
+
+li a {
+  display: block;
+  color: rgb(214, 237, 214);
+  padding: 12px 16px;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+li a:hover {
+  background-color: rgb(37, 61, 37);
+  color: white;
+}
+
+li a.active {
+  background-color: rgb(37, 61, 37);
+}
+
+.pfp-container {
+  text-align: center;
+  color: rgb(214, 237, 214);
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.pfp-container > h1 {
+  font-weight: normal;
+}
+
+#profile-photo {
+  width: 100px;
+  margin-bottom: 10px;
+}
+
+.form-container {
   display: flex;
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background-color: rgb(60, 99, 60);
 }
 
 #recipe-form {
-  background-color: rgb(214, 237, 214);
+  background-color: rgb(60, 99, 60);
   padding: 20px;
-  color: rgb(60, 99, 60);
+  color: rgb(214, 237, 214);
   border-radius: 10px;
 }
 
 #recipe-form > input {
   width: 100%;
   outline: none;
+  background-color: rgb(237, 249, 237);
+  border: none;
 }
 
 #recipe-form > textarea {
   width: 300px;
   height: 100px;
   outline: none;
+  background-color: rgb(237, 249, 237);
 }
 
 #recipe-form > button {

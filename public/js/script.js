@@ -66,6 +66,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     displayRecipes('drinks');
 });
 
-document.getElementById('admin-btn').addEventListener('click', function() {
+document.getElementById('login-btn').addEventListener('click', function() {
 window.location.href = '../html/login.html';
+});
+
+document.getElementById('searchInput').addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      const searchWord = document.getElementById('searchInput').value;
+      window.location.href = `../html/search.html?search=${searchWord}`;
+    }
 });

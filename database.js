@@ -38,25 +38,47 @@ app.get("/login", function(req, res){
     res.sendFile(path.join(__dirname, 'public/html', 'login.html'));
 });
 
+app.get("/register", function(req, res){
+    res.sendFile(path.join(__dirname, 'public/html', 'register.html'));
+});
+
+app.get("/admin", function(req, res){
+    res.sendFile(path.join(__dirname, 'public/html', 'admin.html'));
+});
+
 app.post("/login", encoder, function(req, res){
-    var username = req.body.username;
+    var email = req.body.email;
     var password = req.body.password;
-    connection.query("SELECT * FROM users WHERE username = ? AND password = ?", [username, password], function(error, results, fields){
+    connection.query("SELECT * FROM users WHERE email= ? AND password = ?", [email, password], function(error, results, fields){
         if(error){
             console.log(error);
             res.status(500).send("Internal Server Error");
             return;
         }
         if(results.length > 0){
-            res.redirect("/admin.html");
+            if(email=="admin@gmail.com"){
+                res.redirect("/admin");
+            } else {
+              res.sendFile(path.join(__dirname, 'public/html', 'index.html')); 
+            }
+            
         } else {
             res.sendFile(path.join(__dirname, 'public/html', 'login.html'));
         }
     });
 });
 
-app.get("/admin.html", function(req, res){
-    res.sendFile(path.join(__dirname, 'public/html', 'admin.html'));
+app.post("/register", encoder, function(req, res){
+    const email = req.body.email;
+    const password = req.body.password;
+    connection.query("INSERT INTO users (email, password) VALUES (?, ?)", [email, password], function(error, results, fields){
+        if(error){
+            console.log(error);
+            res.status(500).send("Internal Server Error");
+            return;
+        }
+        res.redirect("/login");
+    });
 });
 
 const PORT = process.env.PORT || 5501;

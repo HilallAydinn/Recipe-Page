@@ -1,5 +1,14 @@
 import URL from '../config/config.js';
 
+const nav = document.querySelector(".navbar");
+const navLinks = document.querySelectorAll("a");
+const currentURL = window.location.href;
+navLinks.forEach((link) => {
+    if (link.href === currentURL){
+        link.classList.add("active");
+    }
+});
+
 document.getElementById('recipe-form').addEventListener('submit', async (e) => {
     e.preventDefault();
 

@@ -60,6 +60,15 @@ app.get('/recipes/title/:title', (req, res) => {
   });
 });
 
+app.get('/search', (req, res) => {
+  const searchWord = req.query.q;
+  const sql = 'SELECT * FROM recipes WHERE title LIKE ?';
+  db.query(sql, [`%${searchWord}%`], (err, results) => {
+    if (err) throw err;
+    res.json(results)
+  });
+});
+
 app.post('/recipes', (req, res) => {
   const { title, img, ingredients, instructions, category } = req.body;
   const sql = 'INSERT INTO recipes (title, img, ingredients, instructions, category) VALUES (?, ?, ?, ?, ?)';
@@ -68,6 +77,26 @@ app.post('/recipes', (req, res) => {
       return res.status(500).json({ error: err.message });
     }
     res.status(201).json({ message: 'Recipe added successfully', id: result.insertId});
+  });
+});
+
+app.post('/api/increase-views', (req, res) => {
+  const recipeId = req.body.id;
+
+  connection.query('UPDATE recipes SET views = views + 1 WHERE id = ?', [recipeId], (err, results) => {
+      if (err) {
+          console.error(err);
+          return res.status(500).json({ error: 'Database query failed' });
+      }
+
+      connection.query('SELECT views FROM recipes WHERE id = ?', [recipeId], (err, results) => {
+          if (err) {
+              console.error(err);
+              return res.status(500).json({ error: 'Database query failed' });
+          }
+
+          res.json({ views: results[0].views });
+      });
   });
 });
 

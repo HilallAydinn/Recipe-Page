@@ -49,3 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
     displayRecipes('desserts');
     displayRecipes('drinks');
 });
+
+document.getElementById('searchInput').addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      const searchWord = document.getElementById('searchInput').value;
+      window.location.href = `../html/search.html?search=${searchWord}`;
+    }
+});
