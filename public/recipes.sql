@@ -6,13 +6,17 @@ CREATE TABLE recipes (
     img TEXT NOT NULL,
     ingredients TEXT NOT NULL,
     instructions TEXT NOT NULL,
-    category VARCHAR(50) NOT NULL
+    category VARCHAR(50) NOT NULL,
+    views INT DEFAULT 0,
+    addedDate DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) UNIQUE NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(50) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 
@@ -49,6 +53,6 @@ VALUES
 ("Cucumber-Lime Tonic", "https://www.allrecipes.com/thmb/JLdutPW11FBvhNdiaQ0bvAWHiQE=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/7642520_Cucumber-Lime-Tonic_France-C_4x3-0a493b6b39bb4c4fb2fd499dc45be931.jpg", "1 English cucumber, peeled;2 fluid ounces fresh lime juice;1 1/2 tablespoons sugar;2 cups ice;8 fluid ounces tonic water;2 slices lime, for serving", "Cut two thin slices from cucumber and set aside for garnish. Chop remaining cucumber into large chunks and place in blender with lime juice and sugar. Blend until smooth. Strain the cucumber mixture through a fine strainer into a jar. You should have about 8 ounces.;Fill two glasses with ice. Divide the mixture between the glasses, about 4 ounces each. Top each glass with 4 ounces of tonic water. Garnish with a cucumber and lime slice and serve.", "drinks"),
 ("Woo Woo", "https://images.immediate.co.uk/production/volatile/sites/30/2020/08/440x400-woo-woo-1a6bc34.jpg?quality=90&webp=true&resize=440,400", "50ml vodka;25ml peach schnapps;100ml cranberry juice;few drops fresh lime juice;ice;wedge of lime", "Fill a cocktail shaker with ice then add the vodka, peach schnapps, cranberry juice and a few drops of lime juice. Shake really well then strain into a tumbler with extra ice. Garnish with a wedge of lime.", "drinks");
 
-INSERT INTO users (email, password)
+INSERT INTO users (username, email, password)
 VALUES
 ("admin@gmail.com", "admin");

@@ -69,9 +69,59 @@ app.get('/search', (req, res) => {
   });
 });
 
+app.get('/api/recipe-counts', (req, res) => {
+  const sql = 'SELECT category, COUNT(*) AS count FROM recipes GROUP BY category';
+  db.query(sql, (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      res.json(results);
+  });
+});
+
+app.get('/api/most-viewed', (req, res) => {
+  const sql = 'SELECT id, title, img, views FROM recipes ORDER BY views DESC LIMIT 4';
+  db.query(sql, (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      res.json(results);
+  });
+});
+
+app.get('/api/last-registered-users', (req, res) => {
+  const sql = 'SELECT username, email, date FROM users ORDER BY date DESC LIMIT 5';
+  db.query(sql, (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      res.json(results);
+  });
+});
+
+app.get('/api/total-users', (req, res) => {
+  const sql = 'SELECT COUNT(*) AS totalUsers FROM users';
+  db.query(sql, (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      res.json(results[0]);
+  });
+});
+
+app.get('/api/total-views', (req, res) => {
+  const sql = 'SELECT SUM(views) AS totalViews FROM recipes';
+  db.query(sql, (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      res.json(results[0]);
+  });
+});
+
 app.post('/recipes', (req, res) => {
   const { title, img, ingredients, instructions, category } = req.body;
-  const sql = 'INSERT INTO recipes (title, img, ingredients, instructions, category) VALUES (?, ?, ?, ?, ?)';
+  const sql = 'INSERT INTO recipes (title, img, ingredients, instructions, category, addedDate) VALUES (?, ?, ?, ?, ?, NOW())';
   db.query(sql, [title, img, ingredients, instructions, category], (err, result) => {
     if (err) {
       return res.status(500).json({ error: err.message });
@@ -83,13 +133,13 @@ app.post('/recipes', (req, res) => {
 app.post('/api/increase-views', (req, res) => {
   const recipeId = req.body.id;
 
-  connection.query('UPDATE recipes SET views = views + 1 WHERE id = ?', [recipeId], (err, results) => {
+  db.query('UPDATE recipes SET views = views + 1 WHERE id = ?', [recipeId], (err, results) => {
       if (err) {
           console.error(err);
           return res.status(500).json({ error: 'Database query failed' });
       }
 
-      connection.query('SELECT views FROM recipes WHERE id = ?', [recipeId], (err, results) => {
+      db.query('SELECT views FROM recipes WHERE id = ?', [recipeId], (err, results) => {
           if (err) {
               console.error(err);
               return res.status(500).json({ error: 'Database query failed' });

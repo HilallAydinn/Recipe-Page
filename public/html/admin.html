@@ -15,12 +15,105 @@
           <h1>Admin Panel</h1>
         </div>
       </li>
-      <li><a href="../html/addRecipe.html">Add Recipe</a></li>
-      <li><a href="../html/deleteRecipe.html">Delete Recipe</a></li>
-      <li><a href="../html/patchRecipe.html">Patch Recipe</a></li>
+      <li><a href="#" id="add-recipe-link">Add Recipe</a></li>
+      <li><a href="#" id="delete-recipe-link">Delete Recipe</a></li>
+      <li><a href="#" id="patch-recipe-link">Patch Recipe</a></li>
     </ul>
   </nav>
 
-  <script src="../js/admin.js"></script>
+  <div id="side-panel">
+    <div id="panel-content"></div>
+    <div id="popup" class="popup">
+      <div class="popup-content">
+          <span class="close-button" id="close-popup">&times;</span>
+          <p id="popup-message"></p>
+      </div>
+  </div>
+  </div>
+
+  <div id="statistics-container">
+    <div class="recipe-category" id="breakfast">
+      <div class="info">
+        <p class="number"><br>Recipes</p>
+        <img class="category-image" src="../images/breakfast.png" alt="breakfast-image">
+      </div>
+      <div class="category" id="category-breakfast">
+        <p>Breakfast</p>
+      </div>
+    </div>
+    <div class="recipe-category" id="lunch">
+      <div class="info">
+        <p class="number"><br>Recipes</p>
+        <img class="category-image" src="../images/lunch.png" alt="lunch-image">
+      </div>
+      <div class="category" id="category-lunch">
+        <p>Lunch</p>
+      </div>
+    </div>
+    <div class="recipe-category" id="dinner">
+      <div class="info">
+        <p class="number"><br>Recipes</p>
+        <img class="category-image" src="../images/dinner.png" alt="dinner-image">
+      </div>
+      <div class="category" id="category-dinner">
+        <p>Dinner</p>
+      </div>
+    </div>
+    <div class="recipe-category" id="desserts">
+      <div class="info">
+        <p class="number"><br>Recipes</p>
+        <img class="category-image" src="../images/desserts.png" alt="desserts-image">
+      </div>
+      <div class="category" id="category-desserts">
+        <p>Desserts</p>
+      </div>
+    </div>
+    <div class="recipe-category" id="drinks">
+      <div class="info">
+        <p class="number"><br>Recipes</p>
+        <img class="category-image" src="../images/drinks.png" alt="drinks-image">
+      </div>
+      <div class="category" id="category-drinks">
+        <p>Drinks</p>
+      </div>
+    </div>
+
+    <div id="most-viewed-recipes">
+      <div id="most-viewed-heading">Most Viewed Recipes</div>
+      <div id="recipe-container"></div>
+    </div>
+
+    <div id="last-registered-users">
+      <div id="last-registered-heading">Last Registered Users</div>
+      <div id="users-table">
+        <table>
+          <thead>
+            <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Registration Date</th>
+            </tr>
+          </thead>
+          <tbody id="users-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="total">
+      <div id="total-heading">Total</div>
+      <div id="total-container">
+        <div id="total-users">
+          <p id="number-of-users"><br> Registered Users</p>
+          <img id="total-users-image" src="../images/users.png">
+        </div>
+          <div id="total-views">
+          <p id="number-of-views"><br>Views</p>
+          <img id="total-views-image" src="../images/total-views.png">
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <script src="../js/admin.js" type="module"></script>
 </body>
 </html>
