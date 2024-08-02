@@ -136,6 +136,8 @@ body {
 .recipe-card img {
   width: 200px;
   height: 200px;
+  object-fit: cover;
+  object-position: center;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   margin-bottom:10px;
@@ -143,6 +145,11 @@ body {
 
 .recipe-card > h3 {
   font-weight: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .about {

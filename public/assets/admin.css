@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +8,7 @@
   
 body {
   background-color: rgb(231, 244, 248);
+  font-family: 'Open Sans', sans-serif;
 }
 
 ul {
@@ -275,7 +278,7 @@ nav a.active {
 
 .recipe-card img {
   width: 100%;
-  height: 115px;
+  height: 80px;
 }
 
 .recipe-card-title {
@@ -362,4 +365,9 @@ nav a.active {
 #total-users, #total-views {
   display: flex;
   gap: 50px;
+}
+
+#log-out {
+  background-color: red;
+  margin-top: 150px;
 }

@@ -14,7 +14,7 @@ body {
 
 .navbar {
   position: fixed;
-  background-color: blue;
+  background-color: rgb(60, 99, 60);
   width: 100%;
 }
 
@@ -27,13 +27,13 @@ body {
   float: left;
 }
 
-.navbar ul li#login-btn {
+.navbar ul li#user-btn {
   float: right;
   margin-right: 10px;
-  margin-top: 7px;
+  margin-top: 14px;
 }
 
-.navbar ul li#login-btn > a {
+.navbar ul li#user-btn > a {
   color: rgb(60, 99, 60);
   padding: 8px;
   border: none;
@@ -62,7 +62,48 @@ body {
   width: 40px;
   margin-left: 5px;
   margin-top: 5px;
-  color: rgb(187, 232, 187);
+}
+
+.dropdown {
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  padding: 6px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: rgb(60, 99, 60);
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  left: auto !important;
+  right: 0 !important;
+}
+
+.dropdown-content a {
+  float: none;
+  color: rgb(60, 99, 60);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: rgb(183, 229, 183);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 .home {
@@ -143,13 +184,29 @@ body {
 
 .recipe-card > h3 {
   font-weight: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-.bxs-heart {
-    float: right;
-    font-size: 20px;
-    margin-right: 10px;
+.favorite-btn {
+  background-color: rgb(60, 99, 60);
+  border: none;
+  color: rgb(214, 237, 214);
+  font-size: 20px;
+  cursor: pointer;
 }
+
+.favorite-btn svg {
+  fill: rgb(214, 237, 214); /* Başlangıç rengi */
+}
+
+.favorited svg {
+  fill: red; /* Tıklanıldığında renk değişir */
+}
+
 
 .about {
   display: flex;

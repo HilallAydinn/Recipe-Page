@@ -57,6 +57,21 @@ function timeSince(date) {
     return `${Math.floor(secondsPast / 31536000)} years ago`;
 }
 
+async function fetchFavorites() {
+    const response = await fetch(`http://localhost:5501/api/favorites`);
+    const data = await response.json();
+    const favs = data.map(recipe => recipe.recipe_id);
+
+    const buttons = document.querySelectorAll('.favorite-btn');
+    buttons.forEach(button => {
+        const recipeId = parseInt(button.getAttribute('id'));
+        if (favs.includes(recipeId)) {
+            button.classList.add('favorited');
+        }
+    });
+    return favs;
+}
+
 function createRecipeCard(recipe) {
     const card = document.createElement('div');
     card.className = 'recipe-card';
@@ -65,11 +80,15 @@ function createRecipeCard(recipe) {
         <img src="${recipe.img}" alt="${recipe.title}">
         <h3>${recipe.title}</h3>
         <p><span class="views-count">${recipe.views}</span> views &bull; ${addedDate}</p>
-        <i class='bx bxs-heart' ></i>
+        <button class="favorite-btn" id=${recipe.id}>
+            <svg width="20" height="20" viewBox="0 0 24 24">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+        </button>
     `;
-    
-    card.addEventListener('click', () => {
-        fetch('http://localhost:3000/api/increase-views', {
+    const img = card.querySelector('img');
+    img.addEventListener('click', () => {
+        fetch(`${URL}api/increase-views`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -83,7 +102,37 @@ function createRecipeCard(recipe) {
         })
         .catch(error => console.error('Error:', error));
     });
-
+    const favoriteBtn = card.querySelector('.favorite-btn');
+    favoriteBtn.addEventListener('click', async () => {
+        try {
+            const favoriteRecipes = await fetchFavorites();
+            const recipeId = recipe.id;
+    
+            if (favoriteRecipes.includes(recipeId)) {
+                await fetch(`http://localhost:5501/api/favorites/remove`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ recipeId })
+                });
+                favoriteBtn.classList.remove('favorited');
+                console.log('Removed from favorites');
+            } else {
+                await fetch(`http://localhost:5501/api/favorites/add`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ recipeId })
+                });
+                favoriteBtn.classList.add('favorited');
+                console.log('Added to favorites');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
     return card;
 }
 
@@ -98,15 +147,12 @@ async function displayRecipes(category) {
 
 document.addEventListener('DOMContentLoaded', async () => {
     await fetchAllMealIds();
-    displayRecipes('breakfast');
-    displayRecipes('lunch');
-    displayRecipes('dinner');
-    displayRecipes('desserts');
-    displayRecipes('drinks');
-});
-
-document.getElementById('login-btn').addEventListener('click', function() {
-window.location.href = '../html/login.html';
+    await displayRecipes('breakfast');
+    await displayRecipes('lunch');
+    await displayRecipes('dinner');
+    await displayRecipes('desserts');
+    await displayRecipes('drinks');
+    await fetchFavorites();
 });
 
 document.getElementById('searchInput').addEventListener('keydown', (event) => {
@@ -114,4 +160,23 @@ document.getElementById('searchInput').addEventListener('keydown', (event) => {
       const searchWord = document.getElementById('searchInput').value;
       window.location.href = `../html/search.html?search=${searchWord}`;
     }
+});
+
+document.getElementById('logout').addEventListener('click', (event) => {
+    event.preventDefault();
+  
+    fetch('/logout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      if (response.ok) {
+        window.location.href = '/';
+      } else {
+        console.error('Logout failed');
+      }
+    })
+    .catch(error => console.error('Error:', error))
 });

@@ -7,12 +7,14 @@
   <title>Login</title>
 </head>
 <body>
-  <form action="/login" method="POST">
+  <form id="loginForm">
     <h1>Login</h1>
-    <input type="email" name="email" placeholder="email">
-    <input type="password" name="password" placeholder="password">
+    <input type="email" name="username" id="username" placeholder="email">
+    <input type="password" name="password" id="password" placeholder="password">
     <input type="submit" id="submit-btn" value="login">
     <p>Don't have an account? <a href="register.html">Register</a></p>
   </form>
+
+  <script src="../js/login.js" type="module"></script>
 </body>
 </html>

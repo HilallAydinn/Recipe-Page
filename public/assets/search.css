@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -6,6 +8,7 @@
 
 body {
   background-color: rgb(214, 237, 214);
+  font-family: 'Open Sans', sans-serif;
 }
 
 .navbar {
@@ -69,7 +72,7 @@ body {
 }
 
 .recipe-card {
-  width: 150px;
+  width: 180px;
   background-color: rgb(60, 99, 60);
   color: rgb(206, 238, 206);
   text-align: center;
@@ -79,15 +82,22 @@ body {
 }
 
 .recipe-card img {
-  width: 150px;
-  height: 140px;
+  width: 180px;
+  height: 160px;
+  object-fit: cover;
+  object-position: center;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  margin-bottom:16px;
+  margin-bottom:10px;
 }
 
 .recipe-card > h3 {
   font-weight: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 footer {

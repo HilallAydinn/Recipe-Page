@@ -19,6 +19,13 @@ CREATE TABLE users (
     date DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE favorites (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT,
+  recipe_id INT,
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (recipe_id) REFERENCES recipes(id)
+);
 
 INSERT INTO recipes (title, img, ingredients, instructions, category)
 VALUES

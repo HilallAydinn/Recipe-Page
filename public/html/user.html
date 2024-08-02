@@ -14,11 +14,22 @@
       <li><a href="#home">Home</a></li>
       <li><a href="#breakfast">Recipes</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="/favorites">Favorites</a></li>
       <li id="search">
         <input id="searchInput" type="search" placeholder="Search" autocomplete="off">
         <i class='bx bx-search-alt-2'></i>
       </li>
-      <li id="login-btn"><i class='bx bx-user-circle'></i></li>
+      <li id="user-btn">
+        <div class="dropdown">
+          <button class="dropbtn">
+            <i class='bx bx-user-circle'></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="./profile.html">Profile</a>
+            <a id="logout" href="#">Log out</a>
+          </div>
+        </div> 
+      </li>
     </ul>
   </nav>
 
