@@ -3,41 +3,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
   <link rel="stylesheet" href="../assets/profile.css">
   <title>My Profile</title>
 </head>
 <body>
+  <nav class="navbar">
+    <ul>
+      <li><img id="logo" src="../images/apple.png"></li>
+      <li><a href="../html/user.html#home">Home</a></li>
+      <li><a href="../html/user.html#breakfast">Recipes</a></li>
+      <li><a href="../html/user.html#about">About</a></li>
+      <li><a href="/favorites">Favorites</a></li>
+      <li id="search">
+        <input id="searchInput" type="search" placeholder="Search" autocomplete="off">
+        <i class='bx bx-search-alt-2'></i>
+      </li>
+      <li id="user-btn">
+        <div class="dropdown">
+          <button class="dropbtn">
+            <i class='bx bx-user-circle'></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="../html/profile.html">Profile</a>
+            <a id="logout" href="#">Log out</a>
+          </div>
+        </div> 
+      </li>
+    </ul>
+  </nav>
   <div class="container">
-    <div class="photo">
-      <img src="../images/profile-img.webp">
-    </div>
-    <div class="information">
-      <div class="info" id="email">
-        <img src="../images/email.png" alt="email">
-        <div class="info-text">
-          <p>Email</p>
-          <h2></h2>
-        </div>
-        <button class="change-btn">Change Email</button>
+    <div class="info-container">
+      <div id="profile-img">
+        <img src="../images/broccoli.webp">
       </div>
-      <div class="info" id="username">
-        <img src="../images/username.png" alt="username">
-        <div class="info-text">
-          <p>Username</p>
-          <h2></h2>
+      <div id="information">
+        <div class="user-info" id="email">
+          <div>
+            <img id="email-img" src="../images/email.png">
+            <h3></h3>
+          </div>
         </div>
-        <button class="change-btn">Change Username</button>
-      </div>
-      <div class="info" id="password">
-        <img src="../images/password.png" alt="password">
-        <div class="info-text">
-          <p>Password</p>
-          <h2></h2>
+        <div class="user-info" id="username">
+          <div>
+            <img src="../images/username.png" id="username-img">
+            <h3></h3>
+            
+            <button class="change-btn"><i class='bx bx-edit-alt' ></i> Change Username</button>
+          </div>
         </div>
-        <button class="change-btn">Change Password</button>
+        <div class="user-info" id="password">
+          <div>
+            <img src="../images/password.png" id="password-img">
+            <h3>Password: <span>***********</span></h3>
+            <button class="change-btn"><i class='bx bx-edit-alt' ></i> Change Password</button>
+          </div>
+        </div>
       </div>
+      <div id="favorites"></div>
     </div>
   </div>
+
+  <div id="usernameModal" class="modal">
+    <div class="modal-content">
+      <span id="closeUsernameModal" class="close">&times;</span>
+      <h2>Change Username</h2>
+      <input type="text" id="newUsername" placeholder="Enter new username">
+      <button id="saveUsername">Save</button>
+    </div>
+  </div>
+
+  <div id="passwordModal" class="modal">
+    <div class="modal-content">
+      <span id="closePasswordModal" class="close">&times;</span>
+      <h2>Change Password</h2>
+      <input type="password" id="currentPassword" placeholder="Enter current password">
+      <input type="password" id="newPassword" placeholder="Enter new password">
+      <button id="savePassword">Save</button>
+    </div>
+  </div>
+
+  <footer id="footer">
+    <div class="wrapper">
+      <div class="recipes-section">
+        <h2>Recipes</h2>
+        <ul>
+          <li><a href="#breakfast">Breakfast</a></li>
+          <li><a href="#lunch">Lunch</a></li>
+          <li><a href="#dinner">Dinner</a></li>
+          <li><a href="#desserts">Desserts</a></li>
+          <li><a href="#drinks">Drinks</a></li>
+        </ul>
+      </div>
+      <div class="get-in-touch">
+        <h2>Get in Touch</h2>
+        <ul>
+          <li><i class='bx bxs-phone'></i>+91 9999 999 999</li>
+          <li><i class='bx bxs-envelope'></i>example@gmail.com</li>
+          <li></li>
+        </ul>
+      </div>  
+    </div>
+    <p>&copy; 2024 TastFo. All rights reserved.</p>
+  </footer>
 
   <script src="../js/profile.js"></script>
 </body>

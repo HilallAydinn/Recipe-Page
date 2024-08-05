@@ -85,3 +85,23 @@ async function displayRecipes() {
 window.onload = () => {
   fetchFavoriteMealIds();
 };
+
+document.addEventListener('DOMContentLoaded', async () => {
+  document.getElementById('logout').addEventListener('click', (event) => {
+    event.preventDefault();
+    fetch('http://localhost:5501/logout', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            window.location.href = '/';
+        } else {
+            console.error('Logout failed');
+        }
+    })
+    .catch(error => console.error('Error:', error));
+  });
+});

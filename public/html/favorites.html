@@ -11,11 +11,21 @@
   <nav class="navbar">
     <ul>
       <li><img id="logo" src="../images/apple.png"></li>
-      <li><a href="user.html#home">Home</a></li>
-      <li><a href="user.html#breakfast">Recipes</a></li>
-      <li><a href="user.html#about">About</a></li>
+      <li><a href="../html/user.html#home">Home</a></li>
+      <li><a href="../html/user.html#breakfast">Recipes</a></li>
+      <li><a href="../html/user.html#about">About</a></li>
       <li><a href="#">Favorites</a></li>
-      <li id="login-btn"><i class='bx bx-user-circle'></i></li>
+      <li id="user-btn">
+        <div class="dropdown">
+          <button class="dropbtn">
+            <i class='bx bx-user-circle'></i>
+          </button>
+          <div class="dropdown-content">
+            <a href="../html/profile.html">Profile</a>
+            <a id="logout" href="#">Log out</a>
+          </div>
+        </div> 
+      </li>
     </ul>
   </nav>
 

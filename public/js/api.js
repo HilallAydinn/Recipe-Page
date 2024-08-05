@@ -181,6 +181,49 @@ app.patch('/recipes', (req, res) => {
   });
 });
 
+app.put('/api/profile/username', (req, res) => {
+    if (!req.isAuthenticated()) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    const newUsername = req.body.username;
+    const userId = req.user.id;
+
+    const query = 'UPDATE users SET username = ? WHERE id = ?';
+
+    connection.query(query, [newUsername, userId], (error, results) => {
+        if (error) {
+            console.error('Error updating username:', error);
+            return res.status(500).json({ message: 'Internal Server Error' });
+        }
+        res.status(200).json({ username: newUsername });
+    });
+});
+
+app.get('/cuisines', (req, res) => {
+  const sql = 'SELECT * FROM cuisines';
+  db.query(sql, (err, results) => {
+    if(err) {
+      return res.status(500).json({error: err.message});
+    }
+    res.json(results);
+  });
+});
+
+app.get('/cuisines/id/:id', (req, res) => {
+  const cuisineId = req.params.id;
+  const sql = 'SELECT * FROM cuisines WHERE id = ?';
+  db.query(sql, [cuisineId], (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      if (results.length === 0) {
+          return res.status(404).json({ error: 'Cuisine not found' });
+      }
+      res.json(results[0]);
+  });
+});
+
 app.listen(port, () => {
     console.log(`API works on http://localhost:${port}`);
 });

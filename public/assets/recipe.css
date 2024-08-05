@@ -71,7 +71,8 @@ body {
 }
 
 .recipe-detail {
-  background-color: rgb(60, 99, 60);
+  background-color: rgb(251, 255, 244);
+  color: rgb(60, 99, 60);
   width: 100%;
   max-width: 700px;
   padding: 30px 50px;
@@ -109,7 +110,6 @@ body {
 }
 
 #recipe-instructions li::marker {
-  color: rgb(214, 237, 214);
   font-weight: bold;
 }
 

@@ -26,13 +26,13 @@ body {
   float: left;
 }
 
-.navbar ul li#user-btn {
+.navbar ul li#login-btn {
   float: right;
   margin-right: 10px;
   margin-top: 7px;
 }
 
-.navbar ul li#user-btn > a {
+.navbar ul li#login-btn > a {
   color: rgb(60, 99, 60);
   padding: 8px;
   border: none;
@@ -64,93 +64,7 @@ body {
   color: rgb(187, 232, 187);
 }
 
-.dropdown {
-  overflow: hidden;
-}
-
-.dropdown .dropbtn {
-  font-size: 16px;  
-  border: none;
-  outline: none;
-  padding: 6px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: rgb(60, 99, 60);
-  min-width: 100px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-  left: auto !important;
-  right: 0 !important;
-}
-
-.dropdown-content a {
-  float: none;
-  color: rgb(60, 99, 60);
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-.dropdown-content a:hover {
-  background-color: rgb(183, 229, 183);
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-#favorites-heading {
-  padding-top: 80px;
-  padding-left: 40px;
-  color: rgb(60, 99, 60);
-}
-
-#recipes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 40px;
-  padding-top: 0;
-}
-
-.recipe-card {
-  width: 180px;
-  background-color: rgb(60, 99, 60);
-  color: rgb(206, 238, 206);
-  text-align: center;
-  padding-bottom: 16px;
-  border-radius: 20px;
-  margin-top: 20px;
-}
-
-.recipe-card img {
-  width: 180px;
-  height: 160px;
-  object-fit: cover;
-  object-position: center;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  margin-bottom:10px;
-}
-
-.recipe-card > h3 {
-  font-weight: normal;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
 footer {
-  bottom: 0%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -185,4 +99,42 @@ footer ul {
 .wrapper ul li a {
   text-decoration: none;
   color: rgb(214, 237, 214);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+  padding-top: 70px;
+}
+
+.detail-container {
+  background-color: rgb(251, 255, 244);
+  width: 100%;
+  padding: 30px 50px;
+  border-radius: 30px;
+}
+
+.cuisine-card  img {
+  width: 500px;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 15px;
+  margin-right: 30px;
+  float: left;
+}
+
+.title {
+  font-size: 30px;
+  color: rgb(60, 99, 60);
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.info {
+  font-size: 18px;
+  line-height: 1.75rem;
+  color: rgb(60, 99, 60);
 }

@@ -15,10 +15,10 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
 
         if (response.ok) {
             const data = await response.json();
-            window.location.href = data.redirect; // Sunucudan gelen yönlendirme URL'sine gidiyoruz
+            window.location.href = data.redirect;
         } else {
             const errorData = await response.json();
-            alert(`Login failed: ${errorData.message}`); // Hata mesajını gösteriyoruz
+            alert(`Login failed: ${errorData.message}`);
         }
     } catch (error) {
         console.error('Error:', error);

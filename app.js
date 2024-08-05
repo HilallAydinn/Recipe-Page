@@ -37,7 +37,7 @@ app.use(passport.session());
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '001234',
+    password: '',
     database: 'recipes_db'
 });
 
@@ -68,6 +68,14 @@ app.get("/favorites", function(req, res){
 app.get("/profile", function(req, res){
   res.sendFile(path.join(__dirname, 'public/html', 'profile.html'));
 });
+
+app.get("/main", (req, res) => {
+  if(req.isAuthenticated()) {
+    res.sendFile(path.join(__dirname, 'public/html', 'user.html'));
+  } else {
+    res.sendFile(path.join(__dirname, 'public/html', 'index.html'));
+  }
+})
 
 app.post("/logout", (req, res) => {
     req.logout(function (err) {
@@ -118,7 +126,7 @@ app.post("/login", (req, res, next) => {
       }
       if (!user) {
           console.log("Authentication failed:", info);
-          return res.status(401).json({ message: info.message }); // Hata mesajını JSON olarak döndürüyoruz
+          return res.status(401).json({ message: info.message });
       }
       req.logIn(user, (err) => {
           if (err) {
@@ -153,7 +161,7 @@ app.post("/register", encoder, async function(req, res){
 
 passport.use(new LocalStrategy(
   {
-      usernameField: 'email', // `email` alanını kullanıyoruz
+      usernameField: 'email',
       passwordField: 'password'
   },
   async function verify(email, password, cb) {
@@ -260,6 +268,55 @@ app.get('/api/profile', (req, res) => {
   });
 });
 
+app.patch('/api/profile/username', (req, res) => {
+  if (!req.isAuthenticated()) {
+      return res.status(401).json({ message: 'Unauthorized' });
+  }
+
+  const newUsername = req.body.username;
+  const userId = req.user.id;
+
+  const query = 'UPDATE users SET username = ? WHERE id = ?';
+
+  connection.query(query, [newUsername, userId], (error, results) => {
+      if (error) {
+          console.error('Error updating username:', error);
+          return res.status(500).json({ message: 'Internal Server Error' });
+      }
+      res.status(200).json({ username: newUsername });
+  });
+});
+
+app.patch('/api/profile/password', async function(req, res) {
+  if (!req.isAuthenticated()) {
+      return res.status(401).json({ message: 'Unauthorized' });
+  }
+
+  const { currentPassword, newPassword } = req.body;
+  const userId = req.user.id;
+  const userPassword = req.user.password;
+
+  try {
+      const match = await bcrypt.compare(currentPassword, userPassword);
+      if (!match) {
+          return res.status(400).json({ message: 'Current password is incorrect' });
+      }
+    
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      const query = 'UPDATE users SET password = ? WHERE id = ?';
+    
+      connection.query(query, [hashedPassword, userId], (error, results) => {
+          if (error) {
+              console.error('Error updating password:', error);
+              return res.status(500).json({ message: 'Internal Server Error' });
+          }
+          return res.status(200).json({ message: 'Password updated successfully' });
+      });
+  } catch (error) {
+      console.error('Error updating password:', error);
+      return res.status(500).json({ message: 'Server error', error });
+  }
+});
 
 const PORT = process.env.PORT || 5501;
 

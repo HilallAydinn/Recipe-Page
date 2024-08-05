@@ -30,7 +30,7 @@ body {
 .navbar ul li#user-btn {
   float: right;
   margin-right: 10px;
-  margin-top: 14px;
+  margin-top: 8px;
 }
 
 .navbar ul li#user-btn > a {
@@ -200,11 +200,11 @@ body {
 }
 
 .favorite-btn svg {
-  fill: rgb(214, 237, 214); /* Başlangıç rengi */
+  fill: rgb(214, 237, 214);
 }
 
 .favorited svg {
-  fill: red; /* Tıklanıldığında renk değişir */
+  fill: red;
 }
 
 
