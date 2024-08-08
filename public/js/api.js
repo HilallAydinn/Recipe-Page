@@ -224,6 +224,44 @@ app.get('/cuisines/id/:id', (req, res) => {
   });
 });
 
+app.get('/questions', (req, res) => {
+  const sql = 'SELECT * FROM questions';
+  db.query(sql, (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      res.json(results);
+  });
+});
+
+app.get('/questions/id/:id', (req, res) => {
+  const questionId = req.params.id;
+  const sql = 'SELECT * FROM questions WHERE id = ?';
+  db.query(sql, [questionId], (err, results) => {
+      if (err) {
+          return res.status(500).json({ error: err.message });
+      }
+      if (results.length === 0) {
+          return res.status(404).json({ error: 'Question not found' });
+      }
+      res.json(results[0]);
+  });
+});
+
+app.get('/questions/:id/comments', (req, res) => {
+  const questionId = req.params.id;
+  const sql = 'SELECT * FROM comments WHERE question_id = ?';
+  db.query(sql, [questionId], (err, results) => {
+    if (err) {
+        return res.status(500).json({ error: err.message });
+    }
+    if (results.length === 0) {
+        return res.status(404).json({ error: 'Question not found' });
+    }
+    res.json(results);
+  });
+})
+
 app.listen(port, () => {
-    console.log(`API works on http://localhost:${port}`);
+  console.log(`API works on http://localhost:${port}`);
 });

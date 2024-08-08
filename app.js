@@ -101,10 +101,14 @@ app.get("/logout", (req, res) => {
 
 app.get("/admin", (req, res) => {
     if (req.isAuthenticated()) {
+      if(req.email === "admin@gmail.com") {
         res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
         res.setHeader('Pragma', 'no-cache');
         res.setHeader('Expires', '0');
         res.sendFile(path.join(__dirname, 'public/html', 'admin.html'));
+      } else {
+        res.redirect("/login");
+      }
     } else {
       res.redirect("/login");
     }
@@ -190,7 +194,6 @@ passport.use(new LocalStrategy(
       }
   }
 ));
-
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -316,6 +319,30 @@ app.patch('/api/profile/password', async function(req, res) {
       console.error('Error updating password:', error);
       return res.status(500).json({ message: 'Server error', error });
   }
+});
+
+app.post('/api/comments/add', (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+
+  const username = req.user.username;
+  const questionId = req.body.question_id;
+  const comment_text = req.body.comment_text;
+
+  if (!username || !questionId || !comment_text) {
+    return res.status(400).json({ message: 'Missing username, question ID, or comment text' });
+  }
+
+  const query = 'INSERT INTO comments (question_id, commenter, text) VALUES (?, ?, ?)';
+
+  connection.query(query, [questionId, username, comment_text], (error, results) => {
+    if (error) {
+      console.error('Error adding to comments:', error);
+      return res.status(500).json({ message: 'Internal Server Error' });
+    }
+    res.status(200).json({ message: 'Comment added successfully' });
+  });
 });
 
 const PORT = process.env.PORT || 5501;

@@ -34,6 +34,27 @@ CREATE TABLE cuisines (
   information TEXT NOT NULL
 );
 
+CREATE TABLE questions (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  text TEXT NOT NULL,
+  askedBy VARCHAR(255),
+  date DATE DEFAULT CURRENT_DATE,
+  FOREIGN KEY (askedBy) REFERENCES users(username)
+  comment_count 
+);
+
+CREATE TABLE comments (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  question_id INT,
+  commenter VARCHAR(255),
+  text TEXT,
+  date DATE DEFAULT CURRENT_DATE,
+  FOREIGN KEY (question_id) REFERENCES questions(id)
+);
+
+-- UPDATE questions SET comment_count = comment_count + 1 WHERE id = 1;
+
 INSERT INTO recipes (title, img, ingredients, instructions, category)
 VALUES
 ("Cheese Omelette", "https://images.immediate.co.uk/production/volatile/sites/30/2024/01/Cheese-omelette-45155e3.jpg?quality=90&webp=true&resize=600,400", "2 eggs;½ tbsp olive oil;1 tbsp butter;15g mature cheddar, finely grated", "Crack the eggs into a jug and whisk well with a fork. Season with a pinch of salt.;Heat the oil and butter in a medium non-stick frying pan over a medium-low heat. Once the butter has started to foam, pour in the eggs and tilt to cover the base of the pan. Using a spatula, gently draw in the eggs from four points so there are folds in the centre. Do this once or twice, then leave the eggs to cook gently for 2-3 mins, until there's a little raw egg still in the middle. Sprinkle over the cheese and, using your spatula, gently fold the omelette in half. Switch off the heat and let the residual heat from the pan melt the cheese for 1 min. Slide onto your plate and sprinkle over some black pepper to serve.", "breakfast"),
