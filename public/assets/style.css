@@ -45,7 +45,7 @@ body {
   display: block;
   color: rgb(214, 237, 214);
   text-align: center;
-  padding: 14px 50px;
+  padding: 14px 40px;
   text-decoration: none;
 }
 
@@ -310,7 +310,7 @@ footer ul {
   position: absolute;
 }
 
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   .navbar > ul li a {
     padding: 10px 20px;
   }
@@ -378,5 +378,92 @@ footer ul {
   }
   .features {
     height: auto;
+  }
+} */
+
+@media (max-width: 480px){
+  .home {
+    flex-direction: column-reverse;
+  }
+  .home-image {
+    width: 100%;
+    border-radius: 0;
+  }
+  .recipe-card {
+    width: 350px;
+  }
+  .recipe-card > img {
+    width: 300px;
+    height: 300px;
+  }
+  .about {
+    flex-direction: column;
+  }
+  .about-us {
+    width: 80%;
+  }
+  .features {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .feature > img {
+    width: 60px;
+    height: 60px;
+  }
+}
+@media (min-width: 481px) and (max-width: 1200px){}
+@media (min-width: 1601px){
+  .navbar > ul li > a {
+    font-size: 20px;
+  }
+  .bx-user-circle {
+    font-size: 32px;
+  }
+  .dropdown .dropbtn, .dropdown-content, #searchInput {
+    font-size: 20px;
+  }
+  #search {
+    margin-top: 15px;
+  }
+  .text {
+    width: 600px;
+  }
+  .text > h1{
+    font-size: 50px;
+  }
+  .text > p {
+    font-size: 24px;
+  }
+  .home-image {
+    width: auto;
+  }
+  .recipe-card {
+    width: 300px;
+  }
+  .recipe-card > img {
+    width: 300px;
+    height: 300px;
+  }
+  .about {
+    gap: 180px;
+  }
+  .about-us {
+    width: 60%;
+  }
+  .about-us > h2 {
+    font-size: 40px;
+  }
+  .about-us > p {
+    font-size: 24px;
+  }
+  .features {
+    height: 190px;
+  }
+  .feature > img {
+    width: 120px;
+    height: 120px;
+  }
+  .feature > p {
+    font-size: 18px;
   }
 }

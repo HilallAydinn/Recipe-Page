@@ -11,9 +11,9 @@
   <nav class="navbar">
     <ul>
       <li><img id="logo" src="../images/apple.png"></li>
-      <li><a href="index.html#home">Home</a></li>
-      <li><a href="index.html#breakfast">Recipes</a></li>
-      <li><a href="index.html#about">About</a></li>
+      <li><a href="/main#home">Home</a></li>
+      <li><a href="/main#breakfast">Recipes</a></li>
+      <li><a href="/main#about">About</a></li>
       <li id="cuisines-btn">
         <div class="dropdown">
           <button class="dropbtn">
@@ -30,11 +30,20 @@
         </div> 
       </li>
       <li><a href="#">Q&A</a></li>
-      <li id="login-btn"><a href="../html/login.html"><i class='bx bx-user-circle'></i></a></li>
     </ul>
   </nav>
   <div class="container">
-    <div class="question-container"></div>
+    <div class="question-container">
+      <button id="ask-btn">Ask a Question</button>
+      <div id="question-form-container" style="display: none;">
+        <form id="question-form">
+          <input id="question-title" type="text" placeholder="Type your question title" required>
+          <textarea id="question-text" placeholder="Type your question"></textarea>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <p id="login-message" style="display: none; color: red;">Log in to ask questions</p>
+    </div>
   </div>
 
   <footer id="footer">
@@ -42,11 +51,11 @@
       <div class="recipes-section">
         <h2>Recipes</h2>
         <ul>
-          <li><a href="index.html#breakfast">Breakfast</a></li>
-          <li><a href="index.html#lunch">Lunch</a></li>
-          <li><a href="index.html#dinner">Dinner</a></li>
-          <li><a href="index.html#desserts">Desserts</a></li>
-          <li><a href="index.html#drinks">Drinks</a></li>
+          <li><a href="/main#breakfast">Breakfast</a></li>
+          <li><a href="/main#lunch">Lunch</a></li>
+          <li><a href="/main#dinner">Dinner</a></li>
+          <li><a href="/main#desserts">Desserts</a></li>
+          <li><a href="/main#drinks">Drinks</a></li>
         </ul>
       </div>
       <div class="get-in-touch">

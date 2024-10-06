@@ -40,8 +40,8 @@ CREATE TABLE questions (
   text TEXT NOT NULL,
   askedBy VARCHAR(255),
   date DATE DEFAULT CURRENT_DATE,
-  FOREIGN KEY (askedBy) REFERENCES users(username)
-  comment_count 
+  FOREIGN KEY (askedBy) REFERENCES users(username),
+  comment_count INT DEFAULT 0
 );
 
 CREATE TABLE comments (

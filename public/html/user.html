@@ -15,18 +15,32 @@
       <li><a href="#breakfast">Recipes</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="/favorites">Favorites</a></li>
-      <li><a href="../html/cuisines.html">Cuisines</a></li>
+      <li id="cuisines-btn">
+        <div class="dropdown">
+          <button class="dropbtn">
+            Cuisines
+          </button>
+          <div class="dropdown-content">
+            <a href="../html/cuisine-details.html?id=1">Turkish</a>
+            <a href="../html/cuisine-details.html?id=2">Greek</a>
+            <a href="../html/cuisine-details.html?id=3">Italian</a>
+            <a href="../html/cuisine-details.html?id=4">Spanish</a>
+            <a href="../html/cuisine-details.html?id=5">Mexican</a>
+            <a href="../html/cuisines.html">All Cuisines</a>
+          </div>
+        </div> 
+      </li>
       <li><a href="../html/questions.html">Q&A</a></li>
       <li id="search">
         <input id="searchInput" type="search" placeholder="Search" autocomplete="off">
         <i class='bx bx-search-alt-2'></i>
       </li>
       <li id="user-btn">
-        <div class="dropdown">
-          <button class="dropbtn">
+        <div class="user-dropdown">
+          <button class="user-dropbtn">
             <i class='bx bx-user-circle'></i>
           </button>
-          <div class="dropdown-content">
+          <div class="user-dropdown-content">
             <a href="../html/profile.html">Profile</a>
             <a id="logout" href="#">Log out</a>
           </div>

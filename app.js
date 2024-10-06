@@ -101,7 +101,7 @@ app.get("/logout", (req, res) => {
 
 app.get("/admin", (req, res) => {
     if (req.isAuthenticated()) {
-      if(req.email === "admin@gmail.com") {
+      if(req.user.email === "admin@gmail.com") {
         res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
         res.setHeader('Pragma', 'no-cache');
         res.setHeader('Expires', '0');
@@ -115,12 +115,16 @@ app.get("/admin", (req, res) => {
 });
 
 app.get("/user", (req, res) => {
-    if (req.isAuthenticated()) {
-        res.sendFile(path.join(__dirname, 'public/html', 'user.html'));
-    } else {
-      res.redirect("/login");
-    }
+  if (req.isAuthenticated()) {
+      res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+      res.sendFile(path.join(__dirname, 'public/html', 'user.html'));
+  } else {
+    res.redirect("/login");
+  }
 });
+
 
 app.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
@@ -341,7 +345,49 @@ app.post('/api/comments/add', (req, res) => {
       console.error('Error adding to comments:', error);
       return res.status(500).json({ message: 'Internal Server Error' });
     }
-    res.status(200).json({ message: 'Comment added successfully' });
+    const updateCountQuery = 'UPDATE questions SET comment_count = comment_count + 1 WHERE id = ?';
+
+    connection.query(updateCountQuery, [questionId], (error, results) => {
+      if (error) {
+        console.error('Error updating comment count:', error);
+        return res.status(500).json({ message: 'Internal Server Error' });
+      }
+
+      res.status(200).json({ message: 'Comment added and comment count updated successfully' });
+    });
+  });
+});
+
+app.get('/api/auth/check', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.json({ isAuthenticated: true });
+  } else {
+    res.json({ isAuthenticated: false });
+  }
+});
+
+app.post('/api/questions/add', (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+
+  const username = req.user.username;
+  const title = req.body.title;
+  const text = req.body.text;
+
+  if (!username || !title || !text) {
+    return res.status(400).json({ message: 'Missing parameters' });
+  }
+
+  const query = 'INSERT INTO questions (title, text, askedBy) VALUES (?, ?, ?)';
+
+  connection.query(query, [title, text, username], (error, results) => {
+    if (error) {
+      console.error('Error adding to questions:', error);
+      return res.status(500).json({ message: 'Internal Server Error' });
+    }
+    const updateCountQuery = 'UPDATE questions SET comment_count = comment_count + 1 WHERE id = ?';
+    res.status(200).json({ message: 'Question added successfully' });
   });
 });
 

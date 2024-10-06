@@ -25,7 +25,68 @@ function createQuestionCard(question) {
       <p>${question.comment_count} comments</p>
     </div>
     <button id="answer-btn">Add Comment</button>
+    <div id="comment-form-container" style="display: none;">
+      <form id="comment-form">
+        <textarea id="comment-text" placeholder="Enter your comment"></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <p id="login-message" style="display: none; color: red;">Log in to comment</p>
   `;
+
+  const answerBtn = card.querySelector('#answer-btn');
+  const commentFormContainer = card.querySelector('#comment-form-container');
+  const loginMessage = card.querySelector('#login-message');
+
+  answerBtn.addEventListener('click', () => {
+    fetch('/api/auth/check', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.isAuthenticated) {
+        commentFormContainer.style.display = 'block';
+        loginMessage.style.display = 'none';
+      } else {
+        loginMessage.style.display = 'block';
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  });
+
+  const commentForm = card.querySelector('#comment-form');
+
+  commentForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const commentText = card.querySelector('#comment-text').value;
+    const questionId = question.id;
+
+    fetch('/api/comments/add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        question_id: questionId,
+        comment_text: commentText
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.message === 'Comment added successfully') {
+        alert('Comment added!');
+        commentFormContainer.style.display = 'none';
+        card.querySelector('#comment-text').value = '';
+      } else {
+        alert(data.message);
+      }
+    })
+    .catch(error => console.error('Error:', error));
+  });
+
   return card;
 }
 
@@ -82,4 +143,23 @@ async function displayQuestion() {
 
 document.addEventListener('DOMContentLoaded', () => {
   displayQuestion();
+});
+
+document.getElementById('logout').addEventListener('click', (event) => {
+  event.preventDefault();
+
+  fetch('/logout', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(response => {
+    if (response.ok) {
+      window.location.href = '/';
+    } else {
+      console.error('Logout failed');
+    }
+  })
+  .catch(error => console.error('Error:', error))
 });

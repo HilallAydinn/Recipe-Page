@@ -26,25 +26,11 @@ body {
   float: left;
 }
 
-.navbar ul li#login-btn {
-  float: right;
-  margin-right: 10px;
-  margin-top: 7px;
-}
-
-.navbar ul li#login-btn > a {
-  color: rgb(60, 99, 60);
-  padding: 8px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
 .navbar > ul li > a {
   display: block;
   color: rgb(214, 237, 214);
   text-align: center;
-  padding: 14px 50px;
+  padding: 14px 40px;
   text-decoration: none;
 }
 
@@ -120,10 +106,21 @@ body {
   display: flex;
   flex-direction: column;
   background-color: rgb(187, 232, 187);
-  max-width: 900px;
+  width: 900px;
+  min-height: 50vh;
   gap: 20px;
   padding: 20px;
   border-radius: 20px;
+}
+
+#ask-btn {
+  width: 120px;
+  padding: 6px;
+  border: none;
+  background-color: rgb(60, 99, 60);
+  color: rgb(214, 237, 214);
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .question-card {
